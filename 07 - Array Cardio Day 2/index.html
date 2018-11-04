@@ -47,6 +47,19 @@
     const commentId = comments.findIndex( comment => comment.id === 823423)
     console.log({commentId})
 
+    // Delete element from array by id
+
+    // Popular Redux method
+    const newComments = [
+      ...comments.slice(0, commentId),
+      ...comments.slice(commentId + 1)
+    ]
+    console.table(newComments)
+
+    // And normal use splice
+    comments.splice(commentId, 1)
+    console.table(comments)
+
   </script>
 </body>
 </html>
