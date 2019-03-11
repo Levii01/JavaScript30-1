@@ -107,16 +107,25 @@
   const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]')
   let lastChecked;
   function handleCheck(e) {
-    console.log(e)
+    // console.log(e)
     let inbetween = false;
+    let setTo = true;
+    let last = false;
 
-    if (e.shiftKey && this.checked) {
+
+    if (lastChecked && e.shiftKey && this.checked) {
       checkboxes.forEach(checkbox => {
-        if (checkbox === this || checkbox === lastChecked)
+        if (checkbox === this || lastChecked && checkbox === lastChecked) {
           inbetween = !inbetween
-
-        if (inbetween)
-          checkbox.checked = true
+          setTo = checkbox === this ? checkbox.checked : lastChecked.checked
+          console.log('setTo', setTo)
+          last = true
+        }
+        console.log(inbetween, last,setTo, inbetween || (last && !setTo) ,checkbox)
+        if (inbetween || (last && !setTo)) {
+          checkbox.checked = setTo;
+          last = false
+        }
       })
     }
 
